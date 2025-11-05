@@ -1,7 +1,7 @@
 # About
 This is made by [Eunha Choi](https://github.com/eun346).
 
-::github{repo="eun346/portfolio"}
+::github{repo="eun346/eunha_choi"}
 
 ## Background
 I am a Mechanical Engineering major at [Stony Brook University](https://www.stonybrook.edu). My interest in technology started in middle school, when I first began learning programming languages. Since then, I have continued to grow my skills, combining engineering with coding.  
