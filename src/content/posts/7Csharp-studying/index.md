@@ -23,21 +23,14 @@ In C#, every variable must have a **type**, which determines:
 * how much memory it uses
 * what kind of values it can store
 
-This is emphasized early in the lectures .
-
 ---
 
 ### Value Types 
 
 Common value types include:
-
-* `int` : integers
-* `float`, `double` : decimal numbers
-* `bool` : true / false
-* `char` : single character
+![valType](./images/1valType.png)
 
 Example:
-
 ```csharp
 int level = 100;
 float speed = 3.14f;
@@ -58,15 +51,16 @@ Variables can be:
 * initialized immediately
 * declared first, assigned later
 
-Example from practice:
-
+Example:
 ```csharp
 int a1, a2, a3;
 a1 = 10;
+
+int b = 20;
 ```
 
 If you forget to initialize, the compiler will usually stop you.
-This is intentional — C# avoids “garbage values”.
+This is intentional: C# avoids “garbage values”.
 
 ---
 
@@ -110,11 +104,9 @@ Correct way:
 float result = (float)a / b; // 2.5
 ```
 
-This casting concept is explicitly shown in the examples .
-
 ---
 
-## 3. Conditional Statements (분기문)
+## 3. Conditional Statements
 
 ### if / else
 
@@ -192,11 +184,11 @@ switch(num)
 }
 ```
 
-This appears in the later control-flow section .
+This appears in the later control-flow section.
 
 ---
 
-## 4. Loops (반복문)
+## 4. Loops
 
 ### for loop
 
@@ -205,7 +197,7 @@ Used when the number of iterations is known.
 ```csharp
 for (int i = 0; i < 5; i++)
 {
-    Debug.Log(i);
+    Debug.Log(i); // 0 1 2 3 4
 }
 ```
 
@@ -215,18 +207,27 @@ for (int i = 0; i < 5; i++)
 
 Used when the stopping condition is more important than the count.
 
-```csharp
-int num = 0;
-while (num < 10)
-{
-    num++;
-}
-```
-
 Key difference:
 
 * `while` checks first
 * `do-while` runs at least once
+
+```csharp
+int num1 = 0;
+while (num1 < 10)
+{
+    Console.WriteLine(num1);
+    num1++;
+}
+
+int num2 = 0;
+do
+{
+    Console.WriteLine(num2);
+    num2++;
+}
+while (num2 < 5);
+```
 
 ---
 
@@ -241,11 +242,10 @@ for (int i = 0; i < 10; i++)
 }
 ```
 
-From loop-control examples .
 
 ---
 
-## 5. Arrays (배열)
+## 5. Arrays 
 
 ### Why arrays exist
 
@@ -286,8 +286,6 @@ Access:
 grid[0, 1];
 ```
 
-This is heavily used in the multiplication table examples .
-
 ---
 
 ## 6. Methods (Functions)
@@ -324,5 +322,6 @@ long Sum(int a, int b)
 }
 ```
 
+---
 
 
