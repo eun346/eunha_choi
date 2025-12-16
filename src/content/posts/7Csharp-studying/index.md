@@ -2,7 +2,7 @@
 title: C# Studying
 published: 2025-12-16
 description: C# Basics
-tags: ["C#", "programming language", "studying"]
+tags: [C#, programming language, studying]
 category: Studying
 draft: false
 ---
