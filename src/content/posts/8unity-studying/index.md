@@ -4,7 +4,7 @@ published: 2025-12-20
 description: Unity Basics
 tags: [Unity, VR]
 category: Studying
-draft: true 
+draft: false 
 ---
 
 https://learn.unity.com/pathway/vr-development
