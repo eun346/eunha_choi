@@ -1,6 +1,6 @@
 ---
 title: XR Interaction Toolkit (Unity VR Pathway)
-published: 2025-12-20 ~ 2026.2.28
+published: 2025-12-20
 description: Unity Basics
 tags: [Unity, VR]
 category: Studying
