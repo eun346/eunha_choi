@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07090d" />
+    <meta name="description" content="Learning logs, build notes, and small experiments by Eunha Choi across XR, robotics, Unity, ROS 2, C#, and 3D tools." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Archive — Eunha Choi" />
+    <meta property="og:description" content="Learning logs, technical experiments, and small builds across Unity, ROS 2, VR/XR, C#, and 3D design." />
+    <meta property="og:image" content="../og-blue.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Archive — Eunha Choi" />
+    <meta name="twitter:description" content="Learning logs, technical experiments, and small builds across Unity, ROS 2, VR/XR, C#, and 3D design." />
+    <meta name="twitter:image" content="../og-blue.png" />
+    <title>Archive — Eunha Choi</title>
+    <link rel="stylesheet" href="../styles.css?v=20260801" />
+  </head>
+  <body class="archive-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href="../" aria-label="Eunha Choi, home">
+        <span class="brand-mark">EC</span><span class="brand-copy"><strong>Eunha Choi</strong><small>Mechanical Engineering · CS Minor</small></span>
+      </a>
+      <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-label="Open navigation"><span></span><span></span></button>
+      <nav class="nav-links" data-site-nav aria-label="Primary navigation">
+        <a href="../" data-nav="home">Home</a><a href="../projects/" data-nav="work">Work</a><a href="./" data-nav="archive">Archive</a>
+      </nav>
+    </header>
+
+    <main class="page-shell archive-shell" id="main-content">
+      <section class="page-hero archive-hero" aria-labelledby="archive-title">
+        <div class="reveal">
+          <p class="eyebrow">Study notes / small builds / experiments</p>
+          <h1 id="archive-title">Notes from the <em>workbench.</em></h1>
+        </div>
+        <p class="page-intro reveal">This is where I keep setup notes, small prototypes, class exercises, and the bugs that taught me something. They document work in progress—not polished portfolio projects.</p>
+      </section>
+
+      <section class="archive-controls reveal" aria-label="Archive filters">
+        <label class="search-field"><span>Search notes</span><input type="search" data-archive-search placeholder="Search Unity, ROS 2, C#, Blender…" autocomplete="off" /></label>
+        <div class="archive-filter-group"><p>Category</p><div class="filter-row" data-category-filters></div></div>
+        <div class="archive-filter-group"><p>Topic</p><div class="filter-row" data-tag-filters></div></div>
+        <button class="reset-button" type="button" data-reset-filters>Clear Filters</button>
+      </section>
+
+      <div class="archive-summary"><p data-archive-count>All notes</p><span>Newest first</span></div>
+      <section class="archive-list" data-archive-list aria-label="Archive notes"></section>
+      <div class="empty-state" data-empty-state hidden><p class="eyebrow">No match</p><h2>No notes match those filters.</h2><p>Try another keyword or clear the filters.</p></div>
+    </main>
+
+    <footer class="site-footer"><p>© 2026 Eunha Choi</p><p>Small experiments, documented as I go.</p><a href="../">Back Home</a></footer>
+    <script type="module" src="../site.js?v=20260801"></script>
+  </body>
+</html>
