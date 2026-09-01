@@ -22,24 +22,41 @@ export const projects = [
     "demo": ""
   },
   {
-    "slug": "2faceOnOff",
+    "slug": "2CourtVision",
+    "title": "CourtVision",
+    "category": "Computer Vision / CSE 327",
+    "description": "A basketball video-analysis system that detects and tracks players, identifies key game events such as jump shots and layups, and connects those events to individual player IDs.",
+    "outcome": "Built a multi-stage computer vision pipeline for player, ball, referee, and court-region detection, with player tracking and event recognition for analyzing basketball gameplay.",
+    "tags": [
+      "Computer Vision",
+      "OpenCV",
+      "YOLO",
+      "Object Tracking"
+    ],
+    "accent": "cyan",
+    "image": "./CSE327_ChoiVyas.png",
+    "order": 2,
+    "github": "",
+    "demo": ""
+  },
+  {
+    "slug": "3faceOnOff",
     "title": "FaceOnOff",
-    "category": "Computer Vision / Experiment",
+    "category": "Computer Vision / CSE 327",
     "description": "An early interaction experiment that connects face-detection input to a simple on/off visual response.",
     "outcome": "Used the prototype to practice a real-time detection-to-interface loop; implementation details and results are still being documented.",
     "tags": [
       "Computer Vision",
-      "Face Detection",
-      "Interaction Prototype"
+      "Face Detection"
     ],
     "accent": "cyan",
     "image": "",
-    "order": 2,
+    "order": 3,
     "github": "https://github.com/eun346/faceOnOff",
     "demo": ""
   },
   {
-    "slug": "3solar-webar",
+    "slug": "4solar-webar",
     "title": "Solar System WebAR",
     "category": "XR / WebAR",
     "description": "A browser-based AR scene that presents the Sun, all eight planets, and the Moon as an animated 3D solar system using A-Frame and WebXR.",
@@ -52,7 +69,7 @@ export const projects = [
     ],
     "accent": "cyan",
     "image": "",
-    "order": 2,
+    "order": 4,
     "github": "https://github.com/eun346/solar-system-webar",
     "demo": ""
   }
