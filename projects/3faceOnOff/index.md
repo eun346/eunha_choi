@@ -1,11 +1,11 @@
 ---
 title: FaceOnOff
-category: Computer Vision / Experiment
+category: Computer Vision / CSE 327
 description: An early interaction experiment that connects face-detection input to a simple on/off visual response.
 outcome: Used the prototype to practice a real-time detection-to-interface loop; implementation details and results are still being documented.
-tags: [Computer Vision, Face Detection, Interaction Prototype]
+tags: [Computer Vision, Face Detection]
 accent: cyan
-order: 2
+order: 3
 github: https://github.com/eun346/faceOnOff
 demo:
 draft: false

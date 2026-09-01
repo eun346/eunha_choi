@@ -5,7 +5,7 @@ description: A browser-based AR scene that presents the Sun, all eight planets, 
 outcome: Used A-Frame components and WebXR to practice orbital animation, spatial scale, and AR delivery through a compatible browser.
 tags: [A-Frame, WebXR, WebAR, 3D Interaction]
 accent: cyan
-order: 2
+order: 4
 github: https://github.com/eun346/solar-system-webar
 demo:
 draft: false
