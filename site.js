@@ -1,24 +1,6 @@
+import { setupThemeToggle } from './hero3d.js?v=20261004-light-dark';
 import { contact, technologies } from "./site-data.js";
 import { archiveCategories, archivePosts, archiveTags, projects } from "./content-index.js";
-
-const THEME_STORAGE_KEY = "eunha-portfolio-theme";
-
-function readSavedTheme() {
-  try {
-    return localStorage.getItem(THEME_STORAGE_KEY) === "light" ? "light" : "dark";
-  } catch {
-    return "dark";
-  }
-}
-
-function applyTheme(theme) {
-  document.documentElement.dataset.theme = theme;
-  document.documentElement.style.colorScheme = theme;
-  const themeColor = document.querySelector('meta[name="theme-color"]');
-  themeColor?.setAttribute("content", theme === "light" ? "#f4f8fc" : "#030711");
-}
-
-applyTheme(readSavedTheme());
 
 function formatDate(value) {
   return new Intl.DateTimeFormat("en", {
@@ -40,13 +22,11 @@ function setActiveNavigation() {
   document.querySelectorAll("[data-nav]").forEach((link) => {
     const target = link.dataset.nav;
     const active =
-      target === "home"
-        ? path === "/" || path.endsWith("/eunha_choi/")
-        : target === "work"
-          ? path.includes("/projects")
-          : target === "archive"
-            ? path.includes("/archive")
-            : false;
+      target === "work"
+        ? path.includes("/projects")
+        : target === "notes"
+          ? path.includes("/archive")
+          : target === "home" && document.body.classList.contains("home-page");
     link.classList.toggle("is-active", active);
     if (active) {
       link.setAttribute("aria-current", "page");
@@ -54,6 +34,27 @@ function setActiveNavigation() {
       link.removeAttribute("aria-current");
     }
   });
+}
+
+function setupHeaderScrollState() {
+  const header = document.querySelector(".site-header");
+  if (!header) return;
+
+  let ticking = false;
+  function sync() {
+    header.classList.toggle("is-scrolled", window.scrollY > 24);
+    ticking = false;
+  }
+  sync();
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(sync);
+    },
+    { passive: true },
+  );
 }
 
 function setupMobileNavigation() {
@@ -86,91 +87,11 @@ function setupMobileNavigation() {
   });
 }
 
-function setupThemeToggle() {
-  const header = document.querySelector(".site-header");
-  const nav = document.querySelector("[data-site-nav]");
-  const menu = document.querySelector("[data-menu-toggle]");
-  if (!header || !nav || !menu || header.querySelector("[data-theme-toggle]")) return;
-
-  const controls = document.createElement("div");
-  controls.className = "header-controls";
-  const button = document.createElement("button");
-  button.className = "theme-toggle";
-  button.type = "button";
-  button.dataset.themeToggle = "";
-  button.innerHTML = '<span class="theme-toggle-icon" aria-hidden="true"></span><span data-theme-label></span>';
-
-  function syncButton() {
-    const current = document.documentElement.dataset.theme || "dark";
-    const next = current === "dark" ? "light" : "dark";
-    button.setAttribute("aria-label", `Switch to ${next} mode`);
-    button.setAttribute("aria-pressed", String(current === "light"));
-    button.querySelector("[data-theme-label]").textContent = `${next[0].toUpperCase()}${next.slice(1)} mode`;
-  }
-
-  nav.replaceWith(controls);
-  controls.append(nav, button, menu);
-  syncButton();
-
-  button.addEventListener("click", () => {
-    const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
-    applyTheme(next);
-    try {
-      localStorage.setItem(THEME_STORAGE_KEY, next);
-    } catch {
-      // The selected theme still applies for the current page when storage is unavailable.
-    }
-    syncButton();
+function setupHeroIntro() {
+  document.querySelectorAll('[data-pop]').forEach(item => {
+    item.style.setProperty('--pop', item.dataset.pop);
+    item.classList.add('is-visible');
   });
-}
-
-function setupCursorFollower() {
-  if (!window.matchMedia("(pointer: fine)").matches) return;
-
-  const cursor = document.createElement("div");
-  cursor.className = "cursor-follower";
-  cursor.setAttribute("aria-hidden", "true");
-  document.body.append(cursor);
-
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let currentX = -40;
-  let currentY = -40;
-  let targetX = -40;
-  let targetY = -40;
-  let animationFrame = 0;
-
-  function drawCursor() {
-    const easing = reducedMotion ? 1 : 0.22;
-    currentX += (targetX - currentX) * easing;
-    currentY += (targetY - currentY) * easing;
-    cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
-
-    if (Math.abs(targetX - currentX) > 0.1 || Math.abs(targetY - currentY) > 0.1) {
-      animationFrame = requestAnimationFrame(drawCursor);
-    } else {
-      animationFrame = 0;
-    }
-  }
-
-  function scheduleCursor() {
-    if (!animationFrame) animationFrame = requestAnimationFrame(drawCursor);
-  }
-
-  window.addEventListener("pointermove", (event) => {
-    targetX = event.clientX;
-    targetY = event.clientY;
-    cursor.classList.add("is-visible");
-    const interactive = event.target instanceof Element
-      ? event.target.closest("a, button, input, textarea, select, [role='button'], #hero-model")
-      : null;
-    cursor.classList.toggle("is-interactive", Boolean(interactive));
-    scheduleCursor();
-  }, { passive: true });
-
-  window.addEventListener("pointerdown", () => cursor.classList.add("is-pressed"));
-  window.addEventListener("pointerup", () => cursor.classList.remove("is-pressed"));
-  document.documentElement.addEventListener("mouseleave", () => cursor.classList.remove("is-visible"));
-  window.addEventListener("blur", () => cursor.classList.remove("is-visible"));
 }
 
 function setupRevealAnimations() {
@@ -188,7 +109,7 @@ function setupRevealAnimations() {
     });
   }, { threshold: 0.12, rootMargin: "0px 0px -30px" });
   elements.forEach((element) => {
-    element.classList.add("reveal");
+    element.classList.add("reveal", "reveal-pending");
     observer.observe(element);
   });
 }
@@ -469,7 +390,9 @@ function setupArchivePage() {
     if (count) count.textContent = `${filtered.length} ${filtered.length === 1 ? "note" : "notes"}`;
 
     document.querySelectorAll(".filter-chip").forEach((chip) => {
-      chip.classList.toggle("is-active", chip.dataset.category === state.category || chip.dataset.tag === state.tag);
+      const active = chip.dataset.category === state.category || chip.dataset.tag === state.tag;
+      chip.classList.toggle("is-active", active);
+      chip.setAttribute("aria-pressed", String(active));
     });
     renderArchiveCards(filtered);
   }
@@ -850,12 +773,13 @@ async function setupArchivePostPage() {
 }
 
 setActiveNavigation();
+setupHeaderScrollState();
 setupThemeToggle();
 setupMobileNavigation();
-setupCursorFollower();
 setupContactLinks();
 renderTechnologies();
 renderProjects();
 setupArchivePage();
 setupArchivePostPage();
 setupRevealAnimations();
+setupHeroIntro();

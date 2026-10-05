@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>try{document.documentElement.dataset.theme=localStorage.getItem("eunha-theme")==="dark"?"dark":"light"}catch(e){document.documentElement.dataset.theme="light"}</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#07090d" />
+    <meta name="theme-color" content="#ecefff" />
     <meta
       name="description"
       content="Portfolio of Eunha Choi, a mechanical engineering student minoring in computer science, with projects in VR/XR, computer vision, robotics, and interactive systems."
@@ -18,7 +19,8 @@
     <meta name="twitter:image" content="./og-blue.png" />
     <title>Eunha Choi — Mechanical Engineering & XR Portfolio</title>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-    <link rel="stylesheet" href="./styles.css?v=20260914" />
+    <link rel="stylesheet" href="./styles.css?v=20261004-light-dark" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=20261004-gear-fix" />
   </head>
   <body class="home-page">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -37,31 +39,48 @@
       <nav class="nav-links" data-site-nav aria-label="Primary navigation">
         <a href="./" data-nav="home">Home</a>
         <a href="./projects/" data-nav="work">Work</a>
-        <a href="./archive/" data-nav="archive">Archive</a>
+        <a href="./archive/" data-nav="notes">Note</a>
+        <a href="#contact" data-nav="contact">Contact</a>
       </nav>
     </header>
 
+    <div class="hero-atmosphere" aria-hidden="true">
+      <canvas id="hero-model"></canvas>
+      <div class="model-fallback" data-model-fallback hidden></div>
+    </div>
+
     <main id="main-content">
       <section class="hero" id="home" aria-labelledby="hero-title">
-        <div class="hero-copy reveal">
-          <p class="eyebrow"><span class="status-dot"></span> XR · Robotics · Vision</p>
-          <h1 id="hero-title"><em>Hi, I’m</em> Eunha.<em><br />I build where</em> hardware meets software.</h1>
-          <p class="hero-text">
-            I’m a mechanical engineering student minoring in computer science. Through projects in VR/XR, computer vision, and robotics, I explore how physical systems and digital tools can work together.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="./projects/">View Work <span aria-hidden="true">→</span></a>
-            <a class="button ghost" href="mailto:eun346choi@gmail.com" data-contact-email>Contact Me</a>
+        <div class="hero-copy">
+          <p class="eyebrow hero-pop" data-pop="0"><span class="status-dot"></span> XR · Robotics · Vision</p>
+
+          <div class="hero-row">
+            <h1 id="hero-title" class="hero-row-name hero-pop" data-pop="1">Eunha <br aria-hidden="true" />Choi</h1>
+
+            <div class="hero-3d-cluster hero-pop" data-pop="2" aria-hidden="true">
+              <div class="hero-3d-panel"></div>
+              <div class="hero-3d-ring"></div>
+              <div class="hero-3d-core"></div>
+              <span class="hero-3d-chip">XR · Robotics</span>
+            </div>
+
+            <p class="hero-row-headline hero-pop" data-pop="3">I build where hardware meets software.</p>
           </div>
-          <dl class="hero-facts" aria-label="Portfolio focus">
+
+          <div class="hero-support">
+            <p class="hero-text hero-pop" data-pop="4">
+              I’m a mechanical engineering student minoring in computer science in Stony Brook University. Through projects in VR/XR, computer vision, and robotics, I explore how physical systems and digital tools can work together.
+            </p>
+            <div class="hero-actions hero-pop" data-pop="5">
+              <a class="button primary" href="./projects/">View Work <span aria-hidden="true">→</span></a>
+              <a class="button ghost" href="mailto:eun346choi@gmail.com" data-contact-email>Contact Me</a>
+            </div>
+          </div>
+          <dl class="hero-facts hero-pop" data-pop="6" aria-label="Portfolio focus">
             <div><dt>Study</dt><dd>Mechanical Engineering</dd></div>
             <div><dt>Minor</dt><dd>Computer Science</dd></div>
             <div><dt>Exploring</dt><dd>XR · Vision · Robotics</dd></div>
           </dl>
-        </div>
-
-        <div class="model-stage reveal" aria-label="Interactive 3D workspace with VR and engineering tools">
-          <canvas id="hero-model" aria-hidden="true"></canvas>
         </div>
 
         <a class="scroll-cue" href="#overview">Learn more <span aria-hidden="true">↓</span></a>
@@ -177,7 +196,7 @@
       <a href="#home">Back to top ↑</a>
     </footer>
 
-    <script type="module" src="./site.js?v=20260801"></script>
-    <script type="module" src="./main.js?v=20260728"></script>
+    <script type="module" src="./site.js?v=20261004-light-dark"></script>
+    <script type="module" src="./main.js?v=20261004-light-dark"></script>
   </body>
 </html>

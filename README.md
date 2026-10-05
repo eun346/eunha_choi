@@ -8,14 +8,15 @@ Personal portfolio website for **Eunha Choi**, a Mechanical Engineering student 
 
 - **Home** — Personal introduction, interactive 3D workspace, interests, tools, and contact links
 - **Work** — Selected robotics, WebAR, and computer-vision projects
-- **Archive** — Learning logs, experiments, setup notes, and small technical builds
+- **Note** — Learning logs, experiments, setup notes, and small technical builds
 
 ## Features
 
-- Interactive Three.js engineering workspace with VR equipment
+- Gravity-inspired layout with a procedural Three.js field of ten mechanical part types
+- Original scatter entrance, pointer repulsion, gravity drop, heart formation, and camera release
+- Restrained angular momentum and spherical collision proxies; shared geometry with mobile simplification
 - Responsive desktop, tablet, and mobile layouts
-- Black-and-blue visual system with light and dark themes
-- Theme preference saved in `localStorage`
+- Bright gradients and glass cards with a direct light/dark toggle saved in `localStorage`
 - Markdown-based project and archive content
 - Project image lightbox
 - Archive search, category filters, and topic filters
@@ -49,6 +50,8 @@ Personal portfolio website for **Eunha Choi**, a Mechanical Engineering student 
 ├── styles.css                 # Shared design and responsive styles
 ├── site.js                    # Navigation, themes, cards, filters, and Markdown rendering
 ├── main.js                    # Interactive Three.js scene
+├── mechanical-parts.js        # Shared part geometry, materials, and angular tuning
+├── hero3d.js                  # Scroll progress, pointer input, and light/dark controls
 ├── site-data.js               # Contact information and technology groups
 ├── content-index.js           # Generated project and archive metadata
 ├── tools/
@@ -61,3 +64,7 @@ Recommended viewport checks:
 - Desktop: `1440 × 900`
 - Tablet: `768 × 1024`
 - Mobile: `390 × 844`
+
+Mechanical field tuning lives in `mechanical-parts.js`: `PART_TYPES` controls the mixture,
+`ANGULAR` controls damping and impulses, and `FIELD_STYLE` controls scale and text protection.
+Desktop uses 96 bodies; mobile uses 54 with simpler gears, bearings, springs, and fewer glass pieces.
