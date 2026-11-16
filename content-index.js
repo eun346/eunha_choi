@@ -6,7 +6,7 @@ export const projects = [
     "slug": "1UGV-Lidar-SLAM",
     "title": "UGV LiDAR–Inertial SLAM",
     "category": "Robotics / Mapping Study",
-    "description": "A mapping study that uses repeated LiDAR–inertial SLAM runs from an unmanned ground vehicle to examine how an environment changes over time.",
+    "description": "An independently conducted UGV mapping study using repeated LiDAR–inertial maps to examine structural changes, from scan collection and map preparation through alignment and change visualization.",
     "outcome": "Created a technical poster documenting the sensing and map-comparison workflow for structural change detection.",
     "tags": [
       "UGV",
@@ -17,6 +17,13 @@ export const projects = [
     ],
     "accent": "cyan",
     "image": "./PHM_POSTER_EUNHA CHOI.png",
+    "preview": "./preview.webp",
+    "imageAlt": "Technical poster showing repeated UGV point-cloud maps and highlighted structural differences.",
+    "primaryTags": [
+      "LiDAR",
+      "R3LIVE",
+      "ICP"
+    ],
     "order": 1,
     "github": "",
     "demo": ""
@@ -25,7 +32,7 @@ export const projects = [
     "slug": "2CourtVision",
     "title": "CourtVision",
     "category": "Computer Vision / CSE 327",
-    "description": "A basketball video-analysis system that detects and tracks players, identifies key game events such as jump shots and layups, and connects those events to individual player IDs.",
+    "description": "A collaborative basketball video-analysis project. My main contribution was jersey-number detection and player identification, associating jersey numbers with player IDs to identify scoring players.",
     "outcome": "Built a multi-stage computer vision pipeline for player, ball, referee, and court-region detection, with player tracking and event recognition for analyzing basketball gameplay.",
     "tags": [
       "Computer Vision",
@@ -35,6 +42,14 @@ export const projects = [
     ],
     "accent": "cyan",
     "image": "./CSE327_ChoiVyas.png",
+    "preview": "./preview.webp",
+    "imageAlt": "CourtVision poster showing basketball detection, jersey labels, and a made-or-missed shot map.",
+    "primaryTags": [
+      "OpenCV",
+      "Supervision",
+      "OCR",
+      "YOLO"
+    ],
     "order": 2,
     "github": "",
     "demo": ""
@@ -43,7 +58,7 @@ export const projects = [
     "slug": "3faceOnOff",
     "title": "FaceOnOff",
     "category": "Computer Vision / CSE 327",
-    "description": "An early interaction experiment that connects face-detection input to a simple on/off visual response.",
+    "description": "An experimental webcam application using an existing open-source face detector. I implemented selective face pixelation, recording functionality, and the user interface.",
     "outcome": "Used the prototype to practice a real-time detection-to-interface loop; implementation details and results are still being documented.",
     "tags": [
       "Computer Vision",
@@ -51,26 +66,15 @@ export const projects = [
     ],
     "accent": "cyan",
     "image": "",
+    "preview": "",
+    "imageAlt": "",
+    "primaryTags": [
+      "Python",
+      "OpenCV",
+      "Haar cascades"
+    ],
     "order": 3,
     "github": "https://github.com/eun346/faceOnOff",
-    "demo": ""
-  },
-  {
-    "slug": "4solar-webar",
-    "title": "Solar System WebAR",
-    "category": "XR / WebAR",
-    "description": "A browser-based AR scene that presents the Sun, all eight planets, and the Moon as an animated 3D solar system using A-Frame and WebXR.",
-    "outcome": "Used A-Frame components and WebXR to practice orbital animation, spatial scale, and AR delivery through a compatible browser.",
-    "tags": [
-      "A-Frame",
-      "WebXR",
-      "WebAR",
-      "3D Interaction"
-    ],
-    "accent": "cyan",
-    "image": "",
-    "order": 4,
-    "github": "https://github.com/eun346/solar-system-webar",
     "demo": ""
   }
 ];

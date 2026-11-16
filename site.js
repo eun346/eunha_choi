@@ -1,6 +1,6 @@
 import { setupThemeToggle } from './hero3d.js?v=20261004-light-dark';
 import { contact, technologies } from "./site-data.js";
-import { archiveCategories, archivePosts, archiveTags, projects } from "./content-index.js";
+import { archiveCategories, archivePosts, archiveTags, projects } from "./content-index.js?v=20261115-projects";
 
 function formatDate(value) {
   return new Intl.DateTimeFormat("en", {
@@ -199,96 +199,146 @@ function openImageLightbox(source, title) {
   lightbox.closeButton.focus();
 }
 
-function renderProjects() {
-  const grid = document.querySelector("[data-project-grid]");
+const projectRoot = new URL('./projects/', import.meta.url);
+const projectHref = project => new URL(`project.html?slug=${encodeURIComponent(project.slug)}`, projectRoot).href;
+const projectAsset = (project, path) => new URL(path, new URL(`${project.slug}/`, projectRoot)).href;
 
-  if (!grid) {
+function createProjectVisual(project, eager = false) {
+  const visual = document.createElement(project.image ? 'button' : 'div');
+  visual.className = `project-visual ${project.accent}`;
+  if (project.image) {
+    visual.type = 'button';
+    visual.classList.add('has-image');
+    visual.setAttribute('aria-label', `View full image of ${project.title}`);
+    const image = document.createElement('img');
+    image.src = projectAsset(project, project.preview || project.image);
+    image.alt = project.imageAlt || `${project.title} project poster`;
+    image.loading = eager ? 'eager' : 'lazy';
+    image.decoding = 'async';
+    const hint = document.createElement('span');
+    hint.className = 'image-zoom-hint';
+    hint.textContent = 'View Full Image';
+    visual.append(image, hint);
+    visual.addEventListener('click', () => openImageLightbox(projectAsset(project, project.image), project.title));
+  } else {
+    visual.setAttribute('aria-hidden', 'true');
+    const label = document.createElement('span');
+    label.textContent = project.category.split('/')[0].trim();
+    visual.append(label);
+  }
+  return visual;
+}
+
+function appendProjectLinks(container, project) {
+  for (const [url, label] of [[project.github, 'View Code'], [project.demo, 'Live Demo']]) {
+    if (!url) continue;
+    const link = document.createElement('a');
+    link.className = 'button ghost';
+    link.href = url;
+    link.target = '_blank';
+    link.rel = 'noreferrer';
+    link.textContent = `${label} ↗`;
+    link.setAttribute('aria-label', `${label} for ${project.title} (opens in a new tab)`);
+    container.append(link);
+  }
+}
+
+function renderProjects() {
+  const grid = document.querySelector('[data-project-grid]');
+  if (!grid) return;
+  grid.replaceChildren(...projects.map((project, index) => {
+    const card = document.createElement('article');
+    card.className = 'project-showcase-card';
+    card.dataset.category = project.category;
+    const discipline = document.createElement('div');
+    discipline.className = 'project-discipline';
+    const number = document.createElement('p');
+    number.className = 'project-number';
+    number.textContent = String(index + 1).padStart(2, '0');
+    const title = document.createElement('h2');
+    const titleLink = document.createElement('a');
+    titleLink.href = projectHref(project);
+    titleLink.textContent = project.title;
+    title.append(titleLink);
+    const category = document.createElement('p');
+    category.className = 'eyebrow';
+    category.textContent = project.category;
+    discipline.append(number, title, category);
+    const content = document.createElement('div');
+    content.className = 'project-showcase-content';
+    const description = document.createElement('p');
+    description.textContent = project.description;
+    const tags = document.createElement('div');
+    tags.className = 'tag-list';
+    tags.setAttribute('aria-label', 'Primary technologies');
+    tags.append(...(project.primaryTags || project.tags.slice(0, 4)).map(createTag));
+    const actions = document.createElement('div');
+    actions.className = 'card-actions';
+    const detail = document.createElement('a');
+    detail.className = 'button primary';
+    detail.href = projectHref(project);
+    detail.textContent = 'View Project →';
+    detail.setAttribute('aria-label', `View project: ${project.title}`);
+    actions.append(detail);
+    appendProjectLinks(actions, project);
+    content.append(description, tags, actions);
+    card.append(createProjectVisual(project), discipline, content);
+    return card;
+  }));
+}
+
+async function setupProjectPage() {
+  const article = document.querySelector('[data-project-page]');
+  if (!article) return;
+  const slug = new URLSearchParams(location.search).get('slug');
+  const project = projects.find(item => item.slug === slug);
+  const title = article.querySelector('[data-project-title]');
+  const body = article.querySelector('[data-project-content]');
+  if (!project) {
+    title.textContent = 'Project not found';
+    body.textContent = 'Choose a project from the Work page.';
+    article.removeAttribute('aria-busy');
     return;
   }
-
-  grid.replaceChildren(
-    ...projects.map((project, index) => {
-      const card = document.createElement("article");
-      card.className = "project-showcase-card";
-      card.dataset.category = project.category;
-
-      const visual = document.createElement(project.image ? "button" : "div");
-      visual.className = `project-visual ${project.accent}`;
-      if (project.image) {
-        visual.type = "button";
-        visual.setAttribute("aria-label", `View full image of ${project.title}`);
-        const image = document.createElement("img");
-        image.src = `./${project.slug}/${project.image.replace(/^\.\//, "")}`;
-        image.alt = "";
-        visual.classList.add("has-image");
-        const zoomHint = document.createElement("span");
-        zoomHint.className = "image-zoom-hint";
-        zoomHint.textContent = "View Full Image";
-        visual.append(image, zoomHint);
-        visual.addEventListener("click", () => openImageLightbox(image.src, project.title));
-      } else {
-        visual.setAttribute("aria-hidden", "true");
-        visual.innerHTML = `<span>${project.category.split("/")[0].trim()}</span>`;
-      }
-
-      const discipline = document.createElement("div");
-      discipline.className = "project-discipline";
-
-      const number = document.createElement("p");
-      number.className = "project-number";
-      number.textContent = `0${index + 1}`;
-
-      const category = document.createElement("p");
-      category.className = "eyebrow";
-      category.textContent = project.category;
-
-      const title = document.createElement("h2");
-      title.textContent = project.title;
-
-      const description = document.createElement("p");
-      description.textContent = project.description;
-
-      const outcome = document.createElement("p");
-      outcome.className = "project-outcome";
-      outcome.textContent = project.outcome;
-
-      const tagList = document.createElement("div");
-      tagList.className = "tag-list";
-      tagList.replaceChildren(...project.tags.map(createTag));
-
-      const actions = document.createElement("div");
-      actions.className = "card-actions";
-      if (project.github) {
-        const githubLink = document.createElement("a");
-        githubLink.className = "button secondary";
-        githubLink.href = project.github;
-        githubLink.target = "_blank";
-        githubLink.rel = "noreferrer";
-        githubLink.textContent = "View Code";
-        actions.append(githubLink);
-      }
-      if (project.demo) {
-        const demoLink = document.createElement("a");
-        demoLink.className = "button primary";
-        demoLink.href = project.demo;
-        demoLink.target = "_blank";
-        demoLink.rel = "noreferrer";
-        demoLink.textContent = "Open Project";
-        actions.append(demoLink);
-      }
-
-      discipline.append(number, title, category);
-
-      const content = document.createElement("div");
-      content.className = "project-showcase-content";
-      content.append(description, outcome, tagList);
-      if (actions.childElementCount > 0) {
-        content.append(actions);
-      }
-      card.append(visual, discipline, content);
-      return card;
-    }),
-  );
+  document.title = `${project.title} — Eunha Choi`;
+  document.querySelector('meta[name="description"]')?.setAttribute('content', project.description);
+  title.textContent = project.title;
+  article.querySelector('[data-project-category]').textContent = project.category;
+  article.querySelector('[data-project-summary]').textContent = project.description;
+  article.querySelector('[data-project-tags]').replaceChildren(...(project.primaryTags || project.tags).map(createTag));
+  const media = article.querySelector('[data-project-media]');
+  if (project.image) {
+    const caption = document.createElement('figcaption');
+    caption.textContent = project.imageAlt || `${project.title} project poster`;
+    media.replaceChildren(createProjectVisual(project, true), caption);
+  } else media.remove();
+  appendProjectLinks(article.querySelector('[data-project-links]'), project);
+  const topics = article.querySelector('[data-project-topics]');
+  topics.replaceChildren(...project.tags.map(createTag));
+  try {
+    const response = await fetch(projectAsset(project, './index.md'));
+    if (!response.ok) throw new Error(`Project content returned ${response.status}`);
+    const { markdown } = parseFrontMatter(await response.text());
+    // The page already owns the h1; existing Markdown rendering maps # sections to h2.
+    body.innerHTML = renderMarkdown(markdown.replace(/^\s*# [^\n]+\n/, ''));
+    body.querySelectorAll('img[src^="./"], a[href^="./"]').forEach(element => {
+      const attribute = element.tagName === 'IMG' ? 'src' : 'href';
+      element.setAttribute(attribute, projectAsset(project, element.getAttribute(attribute)));
+    });
+  } catch {
+    body.replaceChildren();
+    const message = document.createElement('p');
+    message.textContent = 'The project notes could not be loaded. You can still return to Work or use the available project links.';
+    message.setAttribute('role', 'status');
+    body.append(message);
+  } finally {
+    article.removeAttribute('aria-busy');
+  }
+  const position = projects.indexOf(project);
+  const next = projects[(position + 1) % projects.length];
+  const nextLink = article.querySelector('[data-next-project]');
+  nextLink.href = projectHref(next);
+  nextLink.textContent = `Next project: ${next.title} →`;
 }
 
 function renderFilterButtons(container, values, type) {
@@ -779,6 +829,7 @@ setupMobileNavigation();
 setupContactLinks();
 renderTechnologies();
 renderProjects();
+setupProjectPage();
 setupArchivePage();
 setupArchivePostPage();
 setupRevealAnimations();
