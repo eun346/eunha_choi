@@ -19,7 +19,8 @@
     <meta name="twitter:image" content="./og-blue.png" />
     <title>Eunha Choi — Mechanical Engineering & XR Portfolio</title>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-    <link rel="stylesheet" href="./styles.css?v=20261004-light-dark" />
+    <link rel="stylesheet" href="./styles.css?v=20261117-home-composition" />
+    <link rel="stylesheet" href="./styles/home.css?v=20261117" />
     <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=20261004-gear-fix" />
   </head>
   <body class="home-page">
@@ -47,25 +48,27 @@
     <main id="main-content">
       <section class="hero" id="home" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="eyebrow hero-pop" data-pop="0"><span class="status-dot"></span> XR · Robotics · Vision</p>
+          <div class="hero-composition">
+            <div class="hero-content">
+              <p class="eyebrow hero-pop" data-pop="0"><span class="status-dot"></span> XR · Robotics · Vision</p>
 
-          <div class="hero-row">
-            <h1 id="hero-title" class="hero-row-name hero-pop" data-pop="1">Eunha <br aria-hidden="true" />Choi</h1>
+              <h1 id="hero-title" class="hero-row-name hero-pop" data-pop="1">Eunha <br aria-hidden="true" />Choi</h1>
 
-            <div class="hero-robot" data-hero-robot aria-hidden="true">
-              <canvas id="hero-model"></canvas>
+              <p class="hero-row-headline hero-pop" data-pop="3">I build where hardware meets software.</p>
+
+              <div class="hero-support">
+                <p class="hero-text hero-pop" data-pop="4">
+                  I’m a mechanical engineering student minoring in computer science in Stony Brook University. Through projects in VR/XR, computer vision, and robotics, I explore how physical systems and digital tools can work together.
+                </p>
+                <div class="hero-actions hero-pop" data-pop="5">
+                  <a class="button primary" href="./projects/">View Work <span aria-hidden="true">→</span></a>
+                  <a class="button ghost" href="mailto:eun346choi@gmail.com" data-contact-email>Contact Me</a>
+                </div>
+              </div>
             </div>
-
-            <p class="hero-row-headline hero-pop" data-pop="3">I build where hardware meets software.</p>
-          </div>
-
-          <div class="hero-support">
-            <p class="hero-text hero-pop" data-pop="4">
-              I’m a mechanical engineering student minoring in computer science in Stony Brook University. Through projects in VR/XR, computer vision, and robotics, I explore how physical systems and digital tools can work together.
-            </p>
-            <div class="hero-actions hero-pop" data-pop="5">
-              <a class="button primary" href="./projects/">View Work <span aria-hidden="true">→</span></a>
-              <a class="button ghost" href="mailto:eun346choi@gmail.com" data-contact-email>Contact Me</a>
+            <div class="hero-robot" data-hero-robot aria-hidden="true">
+              <span class="hero-ground-ring"></span>
+              <canvas id="hero-model"></canvas>
             </div>
           </div>
           <dl class="hero-facts hero-pop" data-pop="6" aria-label="Portfolio focus">
@@ -104,10 +107,9 @@
         </div>
 
         <div class="experience-list" aria-label="Research experience">
-          <article class="experience-card experience-card-current reveal">
+          <article class="experience-entry experience-entry-current reveal">
             <div class="experience-rail" aria-hidden="true">
               <span class="experience-marker"></span>
-              <span class="experience-line"></span>
             </div>
             <div class="experience-meta">
               <p class="experience-date"><time datetime="2026-09">Sep 2026</time><span>—</span><span>Present</span></p>
@@ -116,22 +118,22 @@
             <div class="experience-body">
               <div class="experience-heading">
                 <div>
-                  <p class="experience-role">Undergraduate Researcher</p>
                   <h3><a href="https://you.stonybrook.edu/smmlab/" target="_blank" rel="noreferrer" aria-label="Visit SMM Lab website (opens in a new tab)">SMM Lab <span aria-hidden="true">↗</span></a></h3>
+                  <p class="experience-role">Undergraduate Researcher</p>
                 </div>
                 <p class="experience-institution">Stony Brook University</p>
               </div>
               <p class="experience-description">Developing haptic devices and VR-based surgical interaction systems, with a focus on hardware control and immersive interfaces.</p>
-              <div class="tag-list" aria-label="SMM Lab research areas">
-                <span class="tag">Haptics</span>
-                <span class="tag">Virtual Reality</span>
-                <span class="tag">Surgical Interaction</span>
-                <span class="tag">Hardware Control</span>
-              </div>
+            </div>
+            <div class="tag-list" aria-label="SMM Lab research areas">
+              <span class="tag">Haptics</span>
+              <span class="tag">Virtual Reality</span>
+              <span class="tag">Surgical Interaction</span>
+              <span class="tag">Hardware Control</span>
             </div>
           </article>
 
-          <article class="experience-card reveal">
+          <article class="experience-entry reveal">
             <div class="experience-rail" aria-hidden="true">
               <span class="experience-marker"></span>
             </div>
@@ -142,18 +144,18 @@
             <div class="experience-body">
               <div class="experience-heading">
                 <div>
-                  <p class="experience-role">Undergraduate Researcher</p>
                   <h3><a href="https://www.meic-lab.com/" target="_blank" rel="noreferrer" aria-label="Visit MEIC Lab website (opens in a new tab)">MEIC Lab <span aria-hidden="true">↗</span></a></h3>
+                  <p class="experience-role">Undergraduate Researcher</p>
                 </div>
                 <p class="experience-institution">Stony Brook University</p>
               </div>
               <p class="experience-description">Worked on mixed reality, robotics, LiDAR mapping, and robot communication projects. I plan to continue collaborating with the lab after returning to Korea.</p>
-              <div class="tag-list" aria-label="MEIC Lab research areas">
-                <span class="tag">Mixed Reality</span>
-                <span class="tag">Robotics</span>
-                <span class="tag">LiDAR Mapping</span>
-                <span class="tag">Robot Communication</span>
-              </div>
+            </div>
+            <div class="tag-list" aria-label="MEIC Lab research areas">
+              <span class="tag">Mixed Reality</span>
+              <span class="tag">Robotics</span>
+              <span class="tag">LiDAR Mapping</span>
+              <span class="tag">Robot Communication</span>
             </div>
           </article>
         </div>
@@ -191,6 +193,6 @@
     <script type="module" src="./site.js?v=20261004-light-dark"></script>
     <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
     <script type="module" src="./xr-robot.js?v=20261117"></script>
-    <script type="module" src="./cursor.js?v=20261117"></script>
+    <script type="module" src="./cursor.js"></script>
   </body>
 </html>
