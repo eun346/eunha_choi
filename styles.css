@@ -778,16 +778,28 @@ main,.site-footer {
   gap:16px
 }
 .contact-links .button {
+  gap:7px;
+  padding-inline:18px;
   min-height:48px;
   min-width:150px;
   border-color:#ffffff26;
   background:#ffffff0d;
   box-shadow:none
 }
+.contact-links .contact-icon {
+  width:16px;
+  height:16px;
+  color:#fff;
+}
+.contact-links .contact-icon-solid {
+  fill:currentColor;
+  stroke:none;
+}
 .contact-links .button:hover {
   background:#ffffff1a
 }
 .contact-links .button.primary {
+  gap:5px;
   background:#0e2ac5;
   border-color:#0e2ac5
 }
@@ -1311,6 +1323,11 @@ body.lightbox-open {
   opacity:1;
   transform:none;
   filter:none
+}
+/* Keep skill text sharp while retaining the existing entrance fade and slide. */
+.tech-card.reveal-pending {
+  filter:none;
+  transition:opacity 1.5s var(--ease),transform 1.5s var(--ease);
 }
 .field-loader {
   position:fixed;
@@ -2040,3 +2057,14 @@ body.lightbox-open {
   html.dot-cursor-active .dot-cursor { opacity:1; }
 }
 @media (prefers-reduced-motion:reduce) { .dot-cursor-ring { transition:none; } }
+
+/* Home section copy sits directly on the page background; keep content cards intact. */
+.home-page :is(.hero-copy,.overview-grid>.section-heading,.experience-intro,.skills-section>.section-heading)::before {
+  content:none;
+}
+:root .home-page .overview-copy {
+  background:none;
+  border-color:transparent;
+  backdrop-filter:none;
+  box-shadow:none;
+}

@@ -76,6 +76,32 @@ export const projects = [
     "order": 3,
     "github": "https://github.com/eun346/faceOnOff",
     "demo": ""
+  },
+  {
+    "slug": "4gearbox",
+    "title": "Gearbox Design and Motion Study",
+    "category": "Mechanical Engineering / MEC 203",
+    "description": "Designed and assembled a multi-component gearbox in Autodesk Fusion 360, including individual part modeling, component alignment, and motion visualization.",
+    "outcome": "Completed a 3D gearbox assembly, technical assembly drawing, and motion study.",
+    "tags": [
+      "Mechanical Engineering",
+      "CAD",
+      "Gearbox",
+      "Mechanical Design",
+      "Motion Study"
+    ],
+    "accent": "cyan",
+    "image": "./gearbox.png",
+    "preview": "./gearbox-preview.webp",
+    "imageAlt": "Autodesk Fusion 360 model showing an assembled gearbox with spur gears, shafts, bearings, and housing.",
+    "primaryTags": [
+      "Fusion 360",
+      "CAD",
+      "Motion Study"
+    ],
+    "order": 4,
+    "github": "",
+    "demo": ""
   }
 ];
 
