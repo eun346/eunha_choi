@@ -44,11 +44,6 @@
       </nav>
     </header>
 
-    <div class="hero-atmosphere" aria-hidden="true">
-      <canvas id="hero-model"></canvas>
-      <div class="model-fallback" data-model-fallback hidden></div>
-    </div>
-
     <main id="main-content">
       <section class="hero" id="home" aria-labelledby="hero-title">
         <div class="hero-copy">
@@ -57,11 +52,8 @@
           <div class="hero-row">
             <h1 id="hero-title" class="hero-row-name hero-pop" data-pop="1">Eunha <br aria-hidden="true" />Choi</h1>
 
-            <div class="hero-3d-cluster hero-pop" data-pop="2" aria-hidden="true">
-              <div class="hero-3d-panel"></div>
-              <div class="hero-3d-ring"></div>
-              <div class="hero-3d-core"></div>
-              <span class="hero-3d-chip">XR · Robotics</span>
+            <div class="hero-robot" data-hero-robot aria-hidden="true">
+              <canvas id="hero-model"></canvas>
             </div>
 
             <p class="hero-row-headline hero-pop" data-pop="3">I build where hardware meets software.</p>
@@ -197,6 +189,8 @@
     </footer>
 
     <script type="module" src="./site.js?v=20261004-light-dark"></script>
-    <script type="module" src="./main.js?v=20261004-light-dark"></script>
+    <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+    <script type="module" src="./xr-robot.js?v=20261117"></script>
+    <script type="module" src="./cursor.js?v=20261117"></script>
   </body>
 </html>

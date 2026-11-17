@@ -321,6 +321,22 @@ main,.site-footer {
   align-items:flex-end;
   padding:140px 48px 70px
 }
+.home-page .hero {
+  flex-direction:column;
+  align-items:stretch;
+  justify-content:flex-end;
+  overflow:clip;
+}
+/* The robot occupies its own heading cell, never an overlay on copy. */
+.hero-robot {
+  position:relative;
+  width:100%;
+  height:310px;
+  transform-origin:center;
+  contain:layout paint;
+}
+.hero-robot canvas { display:block; width:100%; height:100%; }
+.hero-robot[data-state="unavailable"] canvas { visibility:hidden; }
 .hero-atmosphere {
   position:fixed;
   inset:0;
@@ -1821,7 +1837,7 @@ body.lightbox-open {
   position:relative;
   isolation:isolate;
 }
-.hero-copy::before,.overview-grid>.section-heading::before,.experience-intro::before,.skills-section>.section-heading::before {
+.overview-grid>.section-heading::before,.experience-intro::before,.skills-section>.section-heading::before {
   content:'';
   position:absolute;
   inset:-40px -24px;
@@ -1992,3 +2008,35 @@ body.lightbox-open {
 @media(max-width:767px) {
   :root[data-theme="dark"] .nav-links { background:#141d30f5; border-color:var(--line); }
 }
+
+/* Homepage Hero composition */
+.home-page .hero { justify-content:center; padding-top:120px; }
+.home-page .hero-row {
+  grid-template-columns:minmax(0,1fr) minmax(200px,260px) minmax(240px,300px);
+  gap:24px;
+  align-items:center;
+}
+.home-page .hero-row-name { font-size:clamp(80px,9vw,144px); }
+@media (max-width:1200px) {
+  .home-page .hero-row { grid-template-columns:minmax(0,1fr) 240px; gap:12px 24px; }
+  .home-page .hero-row-headline { grid-column:1 / -1; max-width:600px; }
+  .hero-robot { height:260px; }
+}
+@media (max-width:767px) {
+  .home-page .hero { padding-top:110px; justify-content:flex-start; }
+  .home-page .hero-row { grid-template-columns:minmax(0,1fr) minmax(110px,38%); gap:18px 8px; }
+  .home-page .hero-row-name { font-size:clamp(52px,14.8vw,105px); }
+  .home-page .hero-row-name br { display:block; }
+  .hero-robot { height:190px; }
+}
+/* Native cursor is hidden only after successful initialization and a pointer move. */
+.dot-cursor { position:fixed; inset:0 auto auto 0; z-index:10000; pointer-events:none; opacity:0; color:var(--accent-bright); }
+.dot-cursor-dot,.dot-cursor-ring { position:absolute; left:0; top:0; border-radius:50%; transform:translate(-50%,-50%); }
+.dot-cursor-dot { width:4px; height:4px; background:currentColor; box-shadow:0 0 0 1px var(--bg); }
+.dot-cursor-ring { width:22px; height:22px; border:1px solid currentColor; opacity:.45; transition:width 170ms ease,height 170ms ease; }
+.dot-cursor.is-interactive .dot-cursor-ring { width:30px; height:30px; }
+@media (hover:hover) and (pointer:fine) {
+  html.dot-cursor-active,html.dot-cursor-active * { cursor:none !important; }
+  html.dot-cursor-active .dot-cursor { opacity:1; }
+}
+@media (prefers-reduced-motion:reduce) { .dot-cursor-ring { transition:none; } }
